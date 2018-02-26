@@ -38,19 +38,29 @@ class DiskInfo:
     def collect_data(self):
         data = []
 
-        disk_part = self.get_partitions()
-        data.extend(disk_part)
-
         path_list = []
-        for p in disk_part:
-            try:
-                path_list.append(p[self.disk_prefix+'mountpoint'])
-            except KeyError:
-                print 'Warn: disk partition has no key[mountpoint]'
-        disk_usage = self.get_usage(path_list=path_list)
-        data.extend(disk_usage)
+        try:
+            disk_part = self.get_partitions()
+            data.extend(disk_part)
+            for p in disk_part:
+                try:
+                    path_list.append(p[self.disk_prefix+'mountpoint'])
+                except KeyError:
+                    print 'Warn: disk partition has no key[mountpoint]'
+        except AttributeError as ex:
+            print 'Warn: do not support get disk partitions', ex
 
-        diskio_counters = self.get_io_counters()
-        data.extend(diskio_counters)
+
+        try:
+            disk_usage = self.get_usage(path_list=path_list)
+            data.extend(disk_usage)
+        except AttributeError as ex:
+            print 'Warn: do not support get disk usage', ex
+
+        try:
+            diskio_counters = self.get_io_counters()
+            data.extend(diskio_counters)
+        except AttributeError as ex:
+            print 'Warn: do not support get disk io counters', ex
 
         return data

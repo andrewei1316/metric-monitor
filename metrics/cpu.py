@@ -44,16 +44,28 @@ class CpuInfo:
 
     def collect_data(self):
         data = []
-        cpu_time = self.get_time()
-        data.extend(cpu_time)
+        try:
+            cpu_time = self.get_time()
+            data.extend(cpu_time)
+        except AttributeError as ex:
+            print 'Warn: do not support get cpu time', ex
 
-        cpu_time_percent = self.get_time_percent()
-        data.extend(cpu_time_percent)
+        try:
+            cpu_time_percent = self.get_time_percent()
+            data.extend(cpu_time_percent)
+        except AttributeError as ex:
+            print 'Warn: do not support get cpu time percent', ex
 
-        cpu_freq = self.get_frequency()
-        data.extend(cpu_freq)
+        try:
+            cpu_freq = self.get_frequency()
+            data.extend(cpu_freq)
+        except AttributeError as ex:
+            print 'Warn: do not support get cpu frequency', ex
 
-        cpu_stats = self.get_state()
-        data.append(cpu_stats)
+        try:
+            cpu_stats = self.get_state()
+            data.append(cpu_stats)
+        except AttributeError as ex:
+            print 'Warn: do not support get cpu state', ex
 
         return data

@@ -45,20 +45,32 @@ class NetworkInfo:
 
     def collect_data(self):
         data = []
-        io_counters = self.get_io_counters()
-        data.extend(io_counters)
+
+        try:
+            io_counters = self.get_io_counters()
+            data.extend(io_counters)
+        except AttributeError, ex:
+            print 'Warn: do not support get net io counters', ex
 
         try:
             inter_connections = self.get_connections()
             data.extend(inter_connections)
+        except AttributeError as ex:
+            print 'Warn: do not support get net interface connections', ex
         except net_ps.AccessDenied:
             print 'Warn: network connnections information should run as root'
 
-        if_addrs = self.get_if_addrs()
-        data.extend(if_addrs)
+        try:
+            if_addrs = self.get_if_addrs()
+            data.extend(if_addrs)
+        except AttributeError as ex:
+            print 'Warn: do not support get if addrs', ex
 
-        if_stats = self.get_if_stats()
-        data.extend(if_stats)
+        try:
+            if_stats = self.get_if_stats()
+            data.extend(if_stats)
+        except AttributeError as ex:
+            print 'Warn: do not support get if stats', ex
 
         return data
 
