@@ -2,14 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import psutil as cpu_ps
+from base import MetricInfo
 from tools.utils import namedtuple_to_dict
 
 
-class CpuInfo:
+class CpuInfo(MetricInfo):
     prefix = "cpu_"
 
     def __init__(self, conf=None):
-        pass
+        MetricInfo.__init__(self)
 
     def get_time(self):
         data = []

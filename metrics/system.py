@@ -4,14 +4,15 @@
 import os
 import datetime
 import psutil as sys_ps
+from base import MetricInfo
 from tools.utils import namedtuple_to_dict
 
 
-class SystemInfo:
+class SystemInfo(MetricInfo):
     prefix = 'system_'
 
     def __init__(self, conf=None):
-        pass
+        MetricInfo.__init__(self)
 
     def get_base_info(self):
         """ 获取 启动日期、load、cpu 核数等"""

@@ -2,15 +2,16 @@
 # -*- coding: utf-8 -*-
 
 import psutil as disk_ps
+from base import MetricInfo
 from tools.utils import namedtuple_to_dict
 
 
-class DiskInfo:
+class DiskInfo(MetricInfo):
     disk_prefix = "disk_"
     diskio_prefix = "diskio_"
 
     def __init__(self, conf=None):
-        pass
+        MetricInfo.__init__(self)
 
     def get_partitions(self):
         data = []
@@ -49,7 +50,6 @@ class DiskInfo:
                     print 'Warn: disk partition has no key[mountpoint]'
         except AttributeError as ex:
             print 'Warn: do not support get disk partitions', ex
-
 
         try:
             disk_usage = self.get_usage(path_list=path_list)
