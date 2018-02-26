@@ -61,10 +61,9 @@ class HttpSender(Sender):
         try:
             resp = self.client.post(url=self.url, headers=self.header, data=send_data)
             if resp.status_code is not 200:
-                return resp.content
-            return None
+                print 'Error: send data error:', resp.content
         except requests.exceptions.ConnectionError as ex:
-            return ex
+            print 'Error: send data error:', ex
 
 
 
