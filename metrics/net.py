@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import psutil as net_ps
+from base import MetricInfo
 from tools.utils import namedtuple_to_dict
 
 
-class NetworkInfo:
+class NetworkInfo(MetricInfo):
     prefix = 'net_'
 
     def __init__(self, conf=None):
+        MetricInfo.__init__(self)
         pass
 
     def get_io_counters(self):

@@ -2,14 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import psutil as sensor_ps
+from base import MetricInfo
 from tools.utils import namedtuple_to_dict
 
 
-class SensorInfo:
+class SensorInfo(MetricInfo):
     prefix = "sensor_"
 
     def __init__(self, conf=None):
-        pass
+        MetricInfo.__init__(self)
 
     def get_temperatures(self):
         data = []

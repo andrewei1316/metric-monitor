@@ -2,15 +2,16 @@
 # -*- coding: utf-8 -*-
 
 import psutil as mem_ps
+from base import MetricInfo
 from tools.utils import namedtuple_to_dict
 
 
-class MemoryInfo:
+class MemoryInfo(MetricInfo):
     memPrefix = "mem_"
     swapPrefix = "swap_"
 
     def __init__(self, conf=None):
-        pass
+        MetricInfo.__init__(self)
 
     def get_virtual_memory(self):
         vir_mem = mem_ps.virtual_memory()
