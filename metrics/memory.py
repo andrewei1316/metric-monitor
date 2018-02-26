@@ -23,10 +23,16 @@ class MemoryInfo:
     def collect_data(self):
         data = []
 
-        mem = self.get_virtual_memory()
-        data.append(mem)
+        try:
+            mem = self.get_virtual_memory()
+            data.append(mem)
+        except AttributeError as ex:
+            print 'Warn: do not get virtual memory', ex
 
-        swap = self.get_swap_memory()
-        data.append(swap)
+        try:
+            swap = self.get_swap_memory()
+            data.append(swap)
+        except AttributeError as ex:
+            print 'Warn: do not get swap memory', ex
 
         return data

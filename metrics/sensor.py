@@ -38,20 +38,20 @@ class SensorInfo:
         try:
             temperatures = self.get_temperatures()
             data.extend(temperatures)
-        except AttributeError:
-            print 'Warn: do not support temperature sensor'
+        except AttributeError as ex:
+            print 'Warn: do not support temperature sensor', ex
 
         try:
             fans = self.get_fans()
             data.extend(fans)
-        except AttributeError:
-            print 'Warn: do not support fan sensor'
+        except AttributeError as ex:
+            print 'Warn: do not support fan sensor', ex
 
         try:
             battery = self.get_battery()
             data.extend(battery)
-        except AttributeError:
-            print 'Warn: do not support battery sensor'
+        except AttributeError as ex:
+            print 'Warn: do not support battery sensor', ex
 
         return data
 

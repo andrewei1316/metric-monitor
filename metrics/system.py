@@ -39,10 +39,17 @@ class SystemInfo:
 
     def collect_data(self):
         data = []
-        base_info = self.get_base_info()
-        data.append(base_info)
 
-        users = self.get_users()
-        data.extend(users)
+        try:
+            base_info = self.get_base_info()
+            data.append(base_info)
+        except AttributeError as ex:
+            print 'Warn: do not get system base information', ex
+
+        try:
+            users = self.get_users()
+            data.extend(users)
+        except AttributeError as ex:
+            print 'Warn: do not get system users', ex
 
         return data
